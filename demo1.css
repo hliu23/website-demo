@@ -1,0 +1,15 @@
+#image-wrapper {
+  position: relative;
+  height: 300px;
+}
+
+#img-colored, #img-grayscale {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#img-colored {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  transition: clip-path 3s;
+}
