@@ -15,17 +15,21 @@
       <p class="p">Based on the percent given, turn a part of a colored image into grayscale.</p>
       <form action="/generate" method="post" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="image-input">Image</label>
-          <input type="file" id="image-input" accept="image/png, image/jpeg" name="image" required>
+          <label for="password-input">Password</label>
+          <input type="password" id="password-input" name="password" required>
         </div>
         <div class="form-group">
           <label for="percent-input">Percent</label>
           <input type="number" min="0" max="100" id="percent-input" placeholder="70" name="percent" required>
         </div>
         <div class="form-group">
-          <label for="password-input">Password</label>
-          <input type="password" name="password" required>
+          <label for="image-input">Image</label>
+          <input type="file" id="image-input" accept="image/png, image/jpeg" name="image" required>
+          <div>
+            <small id="image-help" class="form-text text-muted">Only PNG and JPEG files accepted</small>         
+          </div>
         </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
