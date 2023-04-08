@@ -1,13 +1,7 @@
 # website-demo
+Based on the percent given, turn a part of a colored image into grayscale.  
 
-- half the screen grayscale image
-- according to percent fulfilled in the fundraiser, load an animation filling up the percent of the grayscale image with color image
-- two images
+<img src="https://github.com/hliu23/website-demo/blob/main/example/example.jpg?raw=true" width="200" /> =>
+<img src="https://github.com/hliu23/website-demo/blob/main/example/generated.jpg?raw=true" width="200" />
 
-- heroku
-- manipulate image
-- save on server and get a link 
-- or download the image
-
-- edit image
-
+Photo by [Lanju Fotografie](https://unsplash.com/@lanju_fotografie) on [Unsplash](https://unsplash.com/photos/cvS-IDyGKTE)
