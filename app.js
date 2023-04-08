@@ -12,14 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const upload = multer({
   fileFilter: (req, file, cb) => {
-    if (req.body.password == process.env.PASSWORD) {
+    if (req.body.password == process.env.CUSTOM_PASSWORD) {
       if (file.mimetype == "image/png" || file.mimetype == "image/jpeg") {
         // TODO: check for magic number as well
         cb(null, true);
-      } else cb(new Error("Invalid file type"));
+      } else cb(null, false);
+      // cb(new Error("Invalid file type"));
     } else {
-      // cb(null, false);
-      cb(new Error("Incorrect password"));
+      cb(null, false);
+      // cb(new Error("Incorrect password"));
     }
   },
   storage: multer.diskStorage({
@@ -37,16 +38,18 @@ app.get("/", (req, res) => {
 })
 
 app.post("/generate", upload.single("image"), (req, res) => {
-  // TODO: handle errors more elegantly
-  const newPath = path.join(OUTPUT_PATH, "converted_" + req.file.filename);
-
-  generate(req.file.path, newPath)
-  .then((result) => {
-    res.sendFile(path.join(__dirname, newPath));
-  })
-  .catch((err) => {
-    console.error(err);
-  })
+  if (!req.file) {
+    res.send("Upload rejected");
+  } else {
+    const newPath = path.join(OUTPUT_PATH, "converted_" + req.file.filename);
+    generate(req.file.path, newPath)
+    .then((result) => {
+      res.sendFile(path.join(__dirname, newPath));
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
 })
 
 app.listen((process.env.PORT || 8000), () => {})
