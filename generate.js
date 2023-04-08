@@ -5,7 +5,7 @@ function generate(SOURCE_PATH, OUTPUT_PATH) {
   const percent = 30 * 0.01;
   dimensions = sizeOf(SOURCE_PATH);
 
-  jimp.read(SOURCE_PATH)
+  return jimp.read(SOURCE_PATH)
   .then((img) => {
     return img
     .crop(0, dimensions.height * (1-percent), dimensions.width, dimensions.height * percent)
@@ -14,10 +14,9 @@ function generate(SOURCE_PATH, OUTPUT_PATH) {
     return Promise.all([colorImg, jimp.read(SOURCE_PATH)])
   })
   .then(([colorImg, fullColorImg]) => {
-    const grayscaleImg = fullColorImg.grayscale()
-    return grayscaleImg
+    return fullColorImg.grayscale()
     .composite(colorImg, 0, dimensions.height * (1-percent))
-    .write(OUTPUT_PATH);
+    .writeAsync(OUTPUT_PATH);
   })
   .catch((err) => {
     console.error(err);
@@ -25,6 +24,4 @@ function generate(SOURCE_PATH, OUTPUT_PATH) {
 
 }
 
-module.exports = {
-  generate
-}
+module.exports = generate;
